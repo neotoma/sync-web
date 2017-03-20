@@ -1,8 +1,10 @@
 /* jshint node: true */
 
+require('dotenvs')();
+
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'sync-web-v2',
+    modulePrefix: 'sync-web',
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
@@ -25,6 +27,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.EmberENV.API_HOST = process.env.SYNC_WEB_DEV_API_HOST;
   }
 
   if (environment === 'test') {
@@ -40,7 +43,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
+    ENV.EmberENV.API_HOST = process.env.SYNC_WEB_PROD_API_HOST;
   }
 
   return ENV;

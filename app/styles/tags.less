@@ -1,0 +1,104 @@
+a, a:visited, a img { 
+  .standard-link;
+}
+
+a:hover {
+  .standard-link-hover;
+}
+
+a:focus {
+  .standard-link-focus;
+}
+
+body {
+  .standard-text;
+  height: 100%;
+  min-width: 20em;
+}
+
+button {
+  .standard-button;
+  border: none;
+
+  &.enabled {
+    .standard-button-enabled;
+
+    &:hover {
+      .standard-button-enabled-hover;
+    }
+
+    &:focus {
+      .standard-button-enabled-focus;
+
+      &:hover {
+        .standard-button-enabled-focus-hover;
+      }
+    }
+  }
+
+  &:hover {
+    .standard-button-hover;
+  }
+
+  &:focus {
+    .standard-button-focus;
+
+    &:hover {
+      .standard-button-focus-hover;
+    }
+  }
+}
+
+form {
+  .standard-form;
+
+  input[type=checkbox],
+  input[type=radio] {
+    .standard-input-boolean;
+  }
+
+  input[type=email],
+  input[type=text] {
+    .standard-input-text;
+  }
+
+  label {
+    .standard-label;
+  }
+}
+
+h1 { 
+  .standard-header-large;
+
+  &.has-image {
+    .standard-header-large-has-image;
+
+    .image-wrapper {
+      .standard-header-large-image-wrapper;
+    }
+
+    img {
+      .standard-header-large-image;
+    }
+  }
+}
+
+h2 { 
+  .standard-header-medium;
+}
+
+h3 { 
+  .standard-header-small;
+}
+
+hr { 
+  .standard-horizontal-rule;
+}
+
+p { 
+  .standard-paragraph;
+}
+
+strong {
+  .standard-bold;
+}

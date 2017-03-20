@@ -1,0 +1,25 @@
+@import (reference) "standards";
+@import "bower_components/normalize.less/normalize";
+@import "keyframes.less";
+@import "tags.less";
+
+/* Components */
+
+@import "components/footer/app.less";
+@import "components/nav/app.less";
+@import "components/section/intro.less";
+@import "components/section/sources-section.less";
+@import "components/section/storages-section.less";
+
+/* Chaos */
+
+.app-main {
+  padding-bottom: 4em;
+  text-align: left;
+  animation: fadeIn @animation-length;
+  margin: auto;
+
+  @media @mobile {
+    padding: 1em;
+  }
+}

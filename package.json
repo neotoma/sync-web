@@ -1,7 +1,7 @@
 {
-  "name": "sync-web-v2",
+  "name": "sync-web",
   "version": "0.0.0",
-  "description": "Small description for sync-web-v2 goes here",
+  "description": "Small description for sync-web goes here",
   "private": true,
   "directories": {
     "doc": "doc",
@@ -29,6 +29,7 @@
     "ember-cli-htmlbars-inline-precompile": "^0.3.1",
     "ember-cli-inject-live-reload": "^1.4.0",
     "ember-cli-jshint": "^1.0.0",
+    "ember-cli-less": "^1.5.3",
     "ember-cli-qunit": "^1.4.0",
     "ember-cli-release": "0.2.8",
     "ember-cli-sri": "^2.1.0",
@@ -37,6 +38,11 @@
     "ember-export-application-global": "^1.0.5",
     "ember-load-initializers": "^0.5.1",
     "ember-resolver": "^2.0.3",
-    "loader.js": "^4.0.1"
+    "ember-websockets": "6.3.0",
+    "loader.js": "^4.0.1",
+    "mock-socket": "6.0.4"
+  },
+  "dependencies": {
+    "dotenvs": "^1.0.1"
   }
 }

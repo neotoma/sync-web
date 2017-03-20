@@ -6,6 +6,8 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('storages');
+  this.route('sources');
 });
 
 export default Router;

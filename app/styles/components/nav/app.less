@@ -1,0 +1,58 @@
+nav.app {
+  height: 3.125em;
+  color: white;
+  background: #8D00FF;
+  animation: slideNavDown @animation-length;
+  text-align: center;
+  transition: height @transition, padding @transition, opacity @transition;
+  overflow: hidden;
+
+  @media @mobile {
+    margin-bottom: 0;
+  }
+
+  a {
+    .standard-link;
+    height: 100%;
+    color: white;
+    background: none;
+    display: inline-block;
+    padding: 0;
+  }
+
+  img {
+    cursor: pointer;
+    height: 100%;
+  }
+
+  >.interior {
+    box-sizing: border-box;
+    position: relative;
+    height: 100%;
+    padding: 0.7em 1em;
+    text-align: center;
+    margin: auto;
+
+    &.authenticated {
+      text-align: left;
+    }
+  }
+
+  .right {
+    position: absolute;
+    top: 0.7em;
+    right: 1em;
+    text-align: right;
+
+    li {
+      display: inline-block;
+      font-size: 0.85em;
+      letter-spacing: 0.05em;
+      margin-left: 1em;
+
+      &:first-of-type {
+        margin-left: 0;
+      }
+    }
+  }
+}
