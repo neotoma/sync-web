@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import Ember from 'ember';
 
 export default DS.Model.extend({
   itemStorageEnabled: DS.attr('boolean'),
@@ -12,6 +13,8 @@ export default DS.Model.extend({
   }),
 
   logoGlyphUrl: Ember.computed('logoGlyphPath', function() {
-    return 'https://' + window.EmberENV.API_HOST + this.get('logoGlyphPath');
+    if (this.get('logoGlyphPath')) {
+      return 'https://' + window.EmberENV.API_HOST + this.get('logoGlyphPath');
+    }
   })
 });

@@ -12,7 +12,7 @@ export default Ember.Component.extend(ComponentTransitionsMixin, {
   init() {
     this._super(...arguments);
 
-    var socket = this.get('socketIOService').socketFor('https://' + window.EmberENV.API_HOST);
+    this.get('socketIOService').socketFor('https://' + window.EmberENV.API_HOST);
 
     this.get('store').findAll('source').then((sources) => {
       this.set('sources', sources);

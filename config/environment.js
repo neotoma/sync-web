@@ -27,7 +27,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.EmberENV.API_HOST = process.env.SYNC_WEB_DEV_API_HOST;
+    ENV.EmberENV.API_HOST = process.env.SYNC_WEB_API_HOST;
   }
 
   if (environment === 'test') {
@@ -43,7 +43,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.EmberENV.API_HOST = process.env.SYNC_WEB_PROD_API_HOST;
+    ENV.EmberENV.API_HOST = process.env.SYNC_WEB_DEPLOY_API_HOST;
   }
 
   return ENV;

@@ -1,7 +1,7 @@
 {
   "name": "sync-web",
   "version": "0.0.0",
-  "description": "Small description for sync-web goes here",
+  "description": "Web client for sync-server",
   "private": true,
   "directories": {
     "doc": "doc",
@@ -9,10 +9,11 @@
   },
   "scripts": {
     "build": "ember build",
-    "start": "ember server",
-    "test": "ember test"
+    "build-prod": "ember build --environment=production",
+    "deploy": "ember build --environment=production && grunt deploy",
+    "start": "ember server"
   },
-  "repository": "",
+  "repository": "https://github.com/neotoma/sync-web",
   "engines": {
     "node": ">= 0.10.0"
   },
@@ -39,6 +40,10 @@
     "ember-load-initializers": "^0.5.1",
     "ember-resolver": "^2.0.3",
     "ember-websockets": "6.3.0",
+    "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-deploy-files": "^1.0.3",
+    "load-grunt-tasks": "^3.5.2",
     "loader.js": "^4.0.1",
     "mock-socket": "6.0.4"
   },

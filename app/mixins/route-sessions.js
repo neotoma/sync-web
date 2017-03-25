@@ -31,7 +31,7 @@ export default Ember.Mixin.create({
     });
   },
 
-  setupController(controller, model) {
+  setupController(controller) {
     controller.set('sessionUser', this.get('sessionsService.user'));
   }
 });
