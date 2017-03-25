@@ -13,21 +13,22 @@ See also documentation for [the Neotoma project](https://github.com/neotoma/docu
 
 The code requires the following environment variables to run or deploy the app. They can be declared by adding a file named `.env` (in [INI format](https://en.wikipedia.org/wiki/INI_file)) to the base directory, assuming they're not declared elsewhere in the system already. Such a file will be ignored by Git.
 
-- `SYNC_WEB_API_HOST`: Host address of sync-server (e.g. `127.0.0.1:9090`; required to run app)
-- `SYNC_WEB_DEPLOY_API_HOST`: Host address of sync-server for deployed app (required to deploy app)
-- `SYNC_WEB_DEPLOY_HOST`: Host for deployment (required to deploy app)
-- `SYNC_WEB_DEPLOY_USER`: Host user for deployment (required to deploy app)
-- `SYNC_WEB_DEPLOY_DIR`: Host directory for deployment (required to deploy app)
+- `SYNC_WEB_API_HOST`: Host address of sync-server (e.g. `127.0.0.1:9090`; required to run app).
+- `SYNC_WEB_DEPLOY_API_HOST`: Host address of sync-server for deployed app (required to deploy app).
+- `SYNC_WEB_DEPLOY_HOST`: Host for deployment (required to deploy app).
+- `SYNC_WEB_DEPLOY_USER`: Host user for deployment (required to deploy app).
+- `SYNC_WEB_DEPLOY_DIR`: Host directory for deployment (required to deploy app).
 
 ## Installation
 
 Once the environment is ready per above, and [Node.js](http://nodejs.org/) with [NPM](https://www.npmjs.com/) is installed, simply run `npm install` to install dependencies.
 
-## Developing and deploying the app
+## Developing, testing and deploying the app
 
 The following commands can be executed for development and deployment:
 
 - `npm run build`: Builds the app in the `dist` directory for development (i.e. code is not minified, among other things).
-- `npm run build-prod`: Builds the app in the `dist` directory for production
+- `npm run build-prod`: Builds the app in the `dist` directory for production.
 - `npm run deploy`: Builds the app for production and deploys it to a remote host.
 - `npm run start`: Builds the app and starts a web server for development. See output in the console for which address and port to use for testing.
+- `npm run test`: Run tests.

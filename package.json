@@ -11,7 +11,8 @@
     "build": "ember build",
     "build-prod": "ember build --environment=production",
     "deploy": "ember build --environment=production && grunt deploy",
-    "start": "ember server"
+    "start": "ember server",
+    "test": "ember test"
   },
   "repository": "https://github.com/neotoma/sync-web",
   "engines": {
