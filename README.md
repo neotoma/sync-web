@@ -30,5 +30,5 @@ The following commands can be executed for development and deployment:
 - `npm run build`: Builds the app in the `dist` directory for development (i.e. code is not minified, among other things).
 - `npm run build-prod`: Builds the app in the `dist` directory for production.
 - `npm run deploy`: Builds the app for production and deploys it to a remote host.
-- `npm run start`: Builds the app and starts a web server for development. See output in the console for which address and port to use for testing.
+- `npm run dev`: Builds the app and starts a web server for development. See output in the console for which address and port to use for testing.
 - `npm run test`: Run tests.
