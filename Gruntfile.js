@@ -13,7 +13,8 @@ module.exports = function(grunt) {
     'deploy-files': {
       options: {
         destDir: process.env.SYNC_WEB_DEPLOY_DIR,
-        destHost: process.env.SYNC_WEB_DEPLOY_USER + '@' + process.env.SYNC_WEB_DEPLOY_HOST,
+        destHost: process.env.SYNC_WEB_DEPLOY_HOST,
+        destUser: process.env.SYNC_WEB_DEPLOY_USER,
         srcDir: __dirname
       },
       dist: {
