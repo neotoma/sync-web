@@ -1,0 +1,79 @@
+div.item {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  height: 0;
+  opacity: 0;
+  padding: 1.5em;
+  transition: opacity 0.5s, transform 0.5s, height 0.5s;
+
+  &.loaded {
+    height: 12em;
+    opacity: 1;
+  }
+
+  &.pending {
+    opacity: 0.5;
+  }
+
+  div.main {
+    box-sizing: border-box;
+    min-width: 25em;
+    padding-right: 2em;
+    width: ~"calc(100% - 15em)";
+
+    div.description {
+      font-family: "Avenir-Medium", sans-serif;
+      font-size: 1.25em;
+      max-height: 3.7em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    div.source-created-at {
+      margin-top: 0.25em;
+      opacity: 0.75;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    div.storage-path {
+      box-sizing: border-box;
+      background: rgba(0,0,0,0.075);
+      border-radius: 2px;
+      direction: rtl;
+      display: inline-block;
+      font-size: 0.75em;
+      margin: 1em -0.75em;
+      max-width: 100%;
+      padding: 0.25em 0.75em;
+      opacity: 0.6;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+
+  div.storage-summary {
+    box-sizing: border-box;
+    text-align: center;
+    width: 15em;
+
+    div.source-to-storage {
+      font-size: 0.9em;
+      height: 1em;
+      line-height: 1em;
+      margin-top: 0.5em;
+      opacity: 0.5;
+      white-space: nowrap;
+      width: 100%;
+
+      img {
+        height: 0.7em;
+        margin: 0 0.25em;
+      }
+    }
+  }
+}

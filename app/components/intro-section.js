@@ -1,7 +1,14 @@
 import Ember from 'ember';
-import ComponentTransitionsMixin from '../mixins/component-transitions';
 
-export default Ember.Component.extend(ComponentTransitionsMixin, {
+export default Ember.Component.extend({
   tagName: 'section',
-  classNames: ['intro']
+  classNames: ['intro'],
+
+  init() {
+    this._super(...arguments);
+    
+    Ember.run.next(() => {
+      this.set('loaded', true);
+    });
+  },
 });

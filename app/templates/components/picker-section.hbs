@@ -1,0 +1,10 @@
+<h1>{{header}}</h1>
+<ul>
+  {{#each sortedServices as |service|}}
+    <li>
+      {{input type="checkbox" id=(concat "service-" service.id) checked=service.isSelected}}
+      <label for="service-{{service.id}}">{{service.name}}</label>
+    </li>
+  {{/each}}
+</ul>
+<button {{action "submit"}} class={{if hasSelected '' 'hidden'}}>Continue</button>

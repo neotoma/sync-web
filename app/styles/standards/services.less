@@ -1,0 +1,72 @@
+.standard-services-section {
+  display: none;
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  &.loaded {
+    display: block;
+  }
+}
+
+.standard-service-li {
+  background: rgba(0,0,0,0.02);
+  border-top: 1px solid @standard-border-color;
+  cursor: default;
+  display: none;
+  font-size: 3em;
+  list-style: none;
+  text-align: left;
+
+  &.loaded {
+    display: block;
+  }
+
+  &:last-of-type {
+    border-bottom: 1px solid @standard-border-color;
+  }
+
+  >a, >div {
+    display: flex;
+    flex-wrap: wrap;
+    font-family: "Avenir-Light", sans-serif;
+    align-items: center;
+    line-height: 1em;
+    padding: 80px;
+    position: relative;
+    text-decoration: none;
+
+    div.name {
+      width: 70%;
+    }
+
+    div.total-items-available {
+      font-size: 0.6em;
+      line-height: 1em;
+      margin-top: 0.5em;
+      opacity: 0.75;
+      width: 100%;
+    }
+
+    div.progress {
+      font-family: "Avenir-Medium", sans-serif;
+      text-align: right;
+      width: 30%;
+    }
+
+    div.progress-bar {
+      background: linear-gradient(to right, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      transition: width 1s;
+
+      &.absolute {
+        width: 100%;
+      }
+    }
+  }
+}

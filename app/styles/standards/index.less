@@ -1,0 +1,156 @@
+@import (reference) "breakpoints";
+
+@max-content-width: 62em;
+
+.standard-font {
+  font-family: 'Avenir-Light', sans-serif;
+}
+
+.standard-font-bold {
+  font-family: "Avenir-Heavy", sans-serif;
+}
+
+.standard-font-bolder {
+  .standard-font;
+  font-weight: 700;
+}
+
+@default-color: #ffffff;
+@light-color: #767676;
+@link-color: #ffffff;
+@dark-link-color: #1770d4;
+@standard-border-color: rgba(0,0,0,0.1);
+@light-background-color: #fbfcfd;
+@dark-background-color: #f5f6f7;
+
+@selection-background-color: #e9e3ef;
+
+@green: #38df77;
+@dark-green: #28ce66;
+@very-dark-green: #14ba53;
+
+@animation-length: 0.5s;
+@transition: @animation-length ease;
+
+.standard-text {
+  .standard-font;
+  color: @default-color;
+  font-weight: normal;
+  line-height: 1.5em;
+}
+
+.standard-bold {
+  .standard-font-bold;
+}
+
+.standard-italic {
+  font-style: italic;
+}
+
+.standard-link {
+  .standard-bold;
+  cursor: pointer;
+  color: @link-color;
+  transition: color @transition;
+}
+
+.standard-link-focus {
+  .standard-link;
+  color: @dark-link-color;
+
+  @media @mobile {
+    color: @link-color;
+  }
+}
+
+.standard-link-hover {
+  .standard-link;
+
+  @media @mobile {
+    color: @link-color;
+  }
+}
+
+.standard-header {
+  cursor: default;
+}
+
+.standard-header-large {
+  .standard-text;
+  .standard-header;
+  font-size: 2em;
+  margin: 2em 0 0 0;
+}
+
+.standard-header-large-has-image {
+  padding-left: 1.75em;
+}
+
+.standard-header-large-image-wrapper {
+  position: absolute;
+  top: 0.25em;
+  left: 0;
+  width: 1em;
+  height: 1em;
+  text-align: center;
+}
+
+.standard-header-large-image {
+  height: 100%;
+  max-width: 100%;
+  margin: auto;
+  display: block;
+}
+
+.standard-header-medium {
+  .standard-text;
+  .standard-header;
+  color: rgba(0,0,0,0.5);
+  font-family: "Avenir-Heavy", sans-serif;
+  font-size: 16px;
+  letter-spacing: 1.7px;
+  margin: 0;
+  padding: 16px 20px;
+  text-align: left;
+  text-transform: uppercase;
+
+  @media @mobile {
+    font-size: 1em;
+  }
+}
+
+.standard-header-small {
+  .standard-text;
+  .standard-header;
+  .standard-font-bold;
+  font-size: 1em;
+  margin-bottom: 0.5em;
+}
+
+.standard-paragraph {
+  .standard-text;
+  font-size: 1.375em;
+  line-height: 1.5em;
+  margin-top: 1em;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+}
+
+.standard-horizontal-rule {
+  border: none;
+  border-top: 1px solid @standard-border-color;
+  margin: 2em 0 2em 0;
+}
+
+.standard-container {
+  margin: auto;
+  max-width: 48em;
+}
+
+.standard-reset-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}

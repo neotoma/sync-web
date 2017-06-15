@@ -1,11 +1,16 @@
 nav.app {
-  height: 3.125em;
-  color: white;
-  background: #8D00FF;
   animation: slideNavDown @animation-length;
+  background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.04));
+  mask-image: linear-gradient(to right, transparent, black, transparent);
+  padding: 4em;
   text-align: center;
   transition: height @transition, padding @transition, opacity @transition;
+  opacity: 0;
   overflow: hidden;
+
+  &.loaded {
+    opacity: 1;
+  }
 
   @media @mobile {
     margin-bottom: 0;
@@ -22,7 +27,7 @@ nav.app {
 
   img {
     cursor: pointer;
-    height: 100%;
+    width: 8.1875em;
   }
 
   >.interior {
@@ -38,21 +43,7 @@ nav.app {
     }
   }
 
-  .right {
-    position: absolute;
-    top: 0.7em;
-    right: 1em;
-    text-align: right;
-
-    li {
-      display: inline-block;
-      font-size: 0.85em;
-      letter-spacing: 0.05em;
-      margin-left: 1em;
-
-      &:first-of-type {
-        margin-left: 0;
-      }
-    }
+  &.collapsed {
+    padding: 2em 4em;
   }
 }

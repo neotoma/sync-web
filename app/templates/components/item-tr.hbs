@@ -1,0 +1,23 @@
+<div class="main">
+  <div class="description">
+    {{#if item.description}}
+      {{item.description}}
+    {{else}}
+      No description available
+    {{/if}}
+  </div>
+  <div class="source-created-at">{{item.contentType.name}} from {{moment-format item.sourceCreatedAt 'MMMM D, YYYY'}}</div>
+  <div class="storage-path">{{item.storage.name}}/Apps/Neotoma{{item.storagePath}}/</div>
+</div>
+<div class="storage-summary">
+  <div class="storage-verified-at">
+    {{#if item.storageVerifiedAt}}
+      {{moment-from-now item.storageVerifiedAt}}
+    {{else}}
+      Pending...
+    {{/if}}
+  </div>
+  <div class="source-to-storage">
+    {{item.source.name}} <img src="/assets/icons/arrow.svg" /> {{item.storage.name}}
+  </div>
+</div>

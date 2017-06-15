@@ -1,0 +1,6 @@
+<h2>{{pluralModelName}} ({{services.length}})</h2>
+<ul>
+  {{#each sortedServices as |service|}}
+    {{service-li service=service modelName=modelName}}
+  {{/each}}
+</ul>

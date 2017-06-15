@@ -1,0 +1,70 @@
+section.picker {
+  ul {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 2em 4em 4em 4em;
+
+    ::selection {
+      background: none;
+    }
+
+    li {
+      background: linear-gradient(rgba(255,255,255,0.07), rgba(255,255,255,0.11));
+      border-radius: 5px;
+      box-sizing: border-box;
+      line-height: 1em;
+      margin: 1em;
+      text-align: left;
+      transition: transform @transition;
+      width: ~"calc(100% / 3 - 2em)";
+
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      input {
+        display: none;
+      }
+
+      label {
+        @font-size: 1.5em;
+        display: block;
+        cursor: pointer;
+        font-family: "Avenir-Medium";
+        font-size: @font-size;
+        line-height: 1em;
+        overflow: hidden;
+        padding: 1.1em 1.1em 1.1em 4em;
+        position: relative;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        &:before {
+          background: rgba(255,255,255,0.15);
+          background-image: url(/assets/icons/check.svg);
+          background-repeat: no-repeat;
+          background-position: center center;
+          background-size: 0 0;
+          border: 2px solid rgba(255,255,255,0.25);
+          border-radius: 5px;
+          content: "";
+          display: inline-block;
+          left: 0.25em / @font-size;
+          position: absolute;
+          height: 4em / @font-size;
+          transition: border-color 0.3s linear, background-size 0.15s linear;
+          top: 0.25em / @font-size;
+          width: 4em / @font-size;
+        }
+      }
+
+      input:checked ~ label:before {
+        background-size: 1em 1em;
+        border-color: white;
+      }
+    }
+  }
+}

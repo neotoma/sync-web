@@ -1,0 +1,19 @@
+<div>
+  <div class="name">
+    {{service.name}}
+
+    {{#if totalItemsAvailable}}
+      <div class="total-items-available">{{format-number totalItemsAvailable}} items available</div>
+    {{/if}}
+  </div>
+  
+  {{#if totalItemsStored}}
+    <div class="progress">
+      {{format-number totalItemsStored}}
+    </div>
+  {{/if}}
+
+  {{#if percentageStored}}
+    <div class="progress-bar" style="width: {{percentageStored}}%"></div>
+  {{/if}}
+</div>

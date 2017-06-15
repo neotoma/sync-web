@@ -10,18 +10,19 @@ module.exports = function(environment) {
     locationType: 'auto',
     EmberENV: {
       EXTEND_PROTOTYPES: {
+        Array: true,
         Date: false,
+        String: true,
+        Function: true
       },
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
-      }
+      },
+      transitionDelay: 500
     },
 
-    APP: {
-      // Here you can pass flags/options to your application instance
-      // when it is created
-    }
+    APP: {}
   };
 
   if (environment === 'development') {

@@ -12,14 +12,26 @@ a:focus {
 
 body {
   .standard-text;
-  height: 100%;
+  background: linear-gradient(#A029FF, #8D00FF) no-repeat 100% fixed;
+  min-height: 100%;
   min-width: 20em;
   margin: 0;
+  padding: 0 0 6em 0;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+
+  ::selection { 
+    background: @selection-background-color;
+  }
 }
 
 button {
   .standard-button;
   border: none;
+
+  &.hidden {
+    .standard-button-hidden;
+  }
 
   &.enabled {
     .standard-button-enabled;
@@ -52,20 +64,20 @@ button {
 
 form {
   .standard-form;
+}
 
-  input[type=checkbox],
-  input[type=radio] {
-    .standard-input-boolean;
-  }
+input[type=checkbox],
+input[type=radio] {
+  .standard-input-boolean;
+}
 
-  input[type=email],
-  input[type=text] {
-    .standard-input-text;
-  }
+input[type=email],
+input[type=text] {
+  .standard-input-text;
+}
 
-  label {
-    .standard-label;
-  }
+label {
+  .standard-label;
 }
 
 h1 { 
@@ -96,10 +108,45 @@ hr {
   .standard-horizontal-rule;
 }
 
+html {
+  background: #8D00FF;
+  height: 100%;
+}
+
 p { 
   .standard-paragraph;
 }
 
+section, table {
+  opacity: 0;
+  transition: opacity @transition;
+
+  &.loaded {
+    opacity: 1;
+  }
+
+  &.hidden {
+    opacity: 0;
+  }
+}
+
 strong {
   .standard-bold;
+}
+
+em {
+  font-style: normal;
+  position: relative;
+
+  &:before {
+    background: url(/assets/images/icons/dash.svg) no-repeat;
+    background-position: 100% 0%;
+    background-size: 100% 100%;
+    bottom: -5px;
+    content: "";
+    height: 11px;
+    left: -15%;
+    position: absolute;
+    width: 130%;
+  }
 }

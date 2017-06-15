@@ -1,0 +1,49 @@
+.standard-form {
+  .standard-text;
+  margin-bottom: 1.5em;
+}
+
+.standard-input-text {
+  @font-size: 1.25em;
+
+  .standard-text;
+  border: none;
+  border-radius: 5em;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.25);
+  color: #360c58;
+  font-family: 'Avenir', sans-serif;
+  font-size: @font-size;
+  line-height: 1em;
+  min-width: calc(20 / @font-size);
+  opacity: 0.9;
+  outline: none;
+  padding: calc(1.625 / @font-size) 0;
+  text-align: center;
+  transition: opacity @transition;
+
+  &::selection {
+    background: @selection-background-color;
+  }
+
+  &:focus {
+    opacity: 1;
+  }
+
+  &::placeholder {
+    color: #ccbdd8;
+    font-family: 'Avenir-Medium', sans-serif;
+    text-transform: uppercase;
+  }
+}
+
+.standard-input-boolean {
+  cursor: pointer;
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+.standard-label {
+  cursor: pointer;
+}

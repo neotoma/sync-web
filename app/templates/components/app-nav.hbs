@@ -1,11 +1,3 @@
-<nav class="app">
-  <div class="interior" {{bind-attr class="sessionUser:authenticated"}}>
-    {{#link-to 'index'}}<img class="logo" src="/assets/images/logos/neotoma-white.svg" draggable="false" />{{/link-to}}
-    <ul class="right">
-      {{#if sessionUser}}
-        <li class="optional">{{sessionUser.name}}</li>
-        <li><a {{action 'deauthenticate'}}>Sign Out</a></li>
-      {{/if}}
-    </ul>
-  </div>
-</nav>
+<div class="interior" {{bind-attr class="sessionUser:authenticated"}}>
+  {{#link-to 'index'}}<img class="logo" src="/assets/images/logos/neotoma-white.svg" draggable="false" />{{/link-to}}
+</div>

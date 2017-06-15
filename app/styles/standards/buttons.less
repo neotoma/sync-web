@@ -1,0 +1,130 @@
+.standard-button {
+  @font-size: 1.25em;
+  
+  .standard-text;
+  background: linear-gradient(#FFDE6C, #C09500);
+  border-radius: 5em;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.25);
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Avenir-Heavy', sans-serif;
+  font-size: @font-size;
+  letter-spacing: 1.5px;
+  line-height: 1em;
+  font-smoothing: subpixel-antialiased;
+  min-width: calc(20 / @font-size);
+  overflow: hidden;
+  padding: calc(1.625 / @font-size) 0;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.35);
+  text-transform: uppercase;
+  transition: color @transition, transform @transition, box-shadow @transition, opacity @transition;
+
+  &:before {
+    background: linear-gradient(rgba(255,255,255,0.25), transparent);
+    content: "";
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    transition: opacity @transition;
+    top: 0;
+    width: 100%;
+  }
+
+  &:hover {
+    box-shadow: 0 4px 2px rgba(0,0,0,0.1);
+    transform: scale(1.05);
+  }
+
+  &:hover:before {
+    opacity: 1;
+  }
+
+  &::selection {
+    background: transparent;
+  }
+}
+
+.standard-button-subtle {
+  .standard-button;
+  background: linear-gradient(rgba(0,0,0,0.13), rgba(0,0,0,0.26));
+  color: rgba(255,255,255,0.75);
+
+  &:hover {
+    box-shadow: 0 4px 2px rgba(0,0,0,0.1);
+    color: white;
+  }
+}
+
+.standard-button-disabled {
+  cursor: default;
+  opacity: 0.75;
+
+  &:hover {
+    box-shadow: 0 2px 0 rgba(0,0,0,0.25);
+    transform: scale(1);
+  }
+}
+
+.standard-button-hidden {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.standard-button-hover {
+  @media @mobile {
+    background: @link-color;
+  }
+}
+
+.standard-button-focus {
+  outline: none;
+
+  @media @mobile {
+    background: @link-color;
+  }
+}
+
+.standard-button-focus-hover {
+  @media @mobile {
+    background: @link-color;
+  }
+}
+
+.standard-button-large {
+  .standard-button;
+  font-size: 1.4em;
+  padding: 1em 1.5em;
+}
+
+.standard-button-enabled {
+  background: @dark-green;
+}
+
+.standard-button-enabled-focus {
+  background: @very-dark-green;
+
+  @media @mobile {
+    background: @dark-green;
+  }
+}
+
+.standard-button-enabled-focus-hover {
+  background: @dark-green;
+
+  @media @mobile {
+    background: @dark-green;
+  }
+}
+
+.standard-button-enabled-hover {
+  background: @dark-green;
+
+  @media @mobile {
+    background: @dark-green;
+  }
+}

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="198px" height="198px" viewBox="0 0 198 198" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
-    <title>simple - white</title>
+<svg width="129px" height="23px" viewBox="0 0 129 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <title>neotoma</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="neotoma" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" font-weight="700" font-family="Arial-Black, Arial Black" line-spacing="190" letter-spacing="1.35714281" font-size="190">
-        <g id="simple---white" fill="#FFFFFF">
-            <text id="N">
-                <tspan x="19" y="168">N</tspan>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" font-size="32" font-family="Lato-Black, Lato" font-weight="700">
+        <g id="nav" transform="translate(-619.000000, -74.000000)" fill="#FFFFFF">
+            <text id="neotoma">
+                <tspan x="618.156" y="96">neotoma</tspan>
             </text>
         </g>
     </g>

@@ -1,0 +1,39 @@
+section.dashboard {
+  display: flex;
+  padding: 3em;
+  
+  div.services {
+    border-right: 1px solid @standard-border-color;
+    margin-right: 3em;
+    padding-right: 3em;
+    width: 20em;
+
+    h2 {
+      padding-top: 0;
+    }
+
+    section.loaded {
+      margin-bottom: 4em;
+    }
+
+    li.source, li.storage {
+      font-size: 20px;
+
+      >a, >div {
+        padding: 20px;
+      }
+    }
+  }
+
+  div.items {
+    width: ~"calc(100% - 20em)";
+  }
+
+  div.start {
+    width: 100%;
+    
+    button {
+      margin-top: 3em;
+    }
+  }
+}

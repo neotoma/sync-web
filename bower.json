@@ -7,6 +7,7 @@
     "ember-qunit-notifications": "0.1.0",
     "urijs": "^1.18.9",
     "socket.io-client": "^1.7.2",
-    "normalize.less": "^1.0.0"
+    "normalize.less": "^1.0.0",
+    "ember-cli-moment-shim": "0.0.3"
   }
 }

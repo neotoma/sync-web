@@ -1,7 +1,6 @@
 section.intro {
   .standard-container;
-  padding: 3em;
-  text-align: center;
+  margin-top: 6em;
 
   @media @mobile {
     margin: 1em auto 2em auto;
@@ -10,27 +9,22 @@ section.intro {
   div.banner {
     .standard-text;
     .standard-font-bold;
-    font-size: 3em;
-    text-align: center;
-    margin: 0.666em auto 0.666em auto;
-    color: black;
-
-    @media @mobile {
-      font-size: 1.9em;
-      margin: 0 auto 0.75em auto;
-    }
+    font-size: (48em / 16);
+    margin: auto;
+    text-shadow: 0 2px 0 rgba(0,0,0,0.15);
   }
 
   div.subbanner {
     .standard-text;
-    font-size: 1.5em;
+    font-size: 1.625em;
+    line-height: 1.5em;
+    margin: 1.23em auto auto auto;
     text-align: center;
-    margin-bottom: 0.667em;
-    font-weight: 300;
+    width: 26em;
+  }
 
-    @media @mobile {
-      font-size: 1.1em;
-      margin-bottom: 1.0714em;
-    }
+  a {
+    .standard-button;
+    margin-top: calc(4em / 1.25);
   }
 }

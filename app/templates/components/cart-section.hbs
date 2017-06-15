@@ -1,0 +1,37 @@
+{{#if cart.hasEnabledService}}
+  <h1>Please grant {{cart.enabledService.name}} access</h1>
+  <p>We need basic access to your account so we can place files representing your data there.</p>
+  <a href="{{cart.enabledService.authUrl}}">Grant access</a>
+  <div class="privacy">
+    <header>We value your privacy</header>
+    <p>This access does not allow us to read any of your existing files on {{cart.enabledService.name}}. It simply lets us create and access a special “Neotoma” folder to store new files within it.</p>
+    <p>If you still don’t feel comfortable, you can <strong {{action cart.removeService cart.enabledService target=cart}}> skip {{cart.enabledService.name}}</strong>.</p>
+  </div>
+{{else if cart.hasDisabledService}}
+  {{#if cart.hasOneDisabledService}}
+    <h1>{{cart.disabledService.name}} isn't supported <em>yet</em></h1>
+    <p>Would you like us to email you when we do support it?</p>
+  {{else}}
+    <h1>The following options aren't supported <em>yet</em></h1>
+    <ul class="services">
+      {{#each cart.disabledServices as |service|}}
+        <li>{{service.name}}</li>
+      {{/each}}
+    </ul>
+    <p>Would you like us to email you when we do support them?</p>
+  {{/if}}
+  {{#if sessions.user}}
+    <form>
+      <button {{action "createNotificationRequests"}}>Yes, please!</button>
+      <button {{action "removeAllServices"}}>No, thanks</button>
+    </form>
+  {{else}}
+    <form>
+      {{input value=email type="email" placeholder="Your email address" spellcheck=false autocomplete="off" required="required"}}
+      <button {{action "createNotificationRequests"}}>Notify me</button>
+    </form>
+    <div class="privacy">
+      <p>We won't use your email for any other purpose.</p>
+    </div>
+  {{/if}}
+{{/if}}
