@@ -5,13 +5,20 @@ export default Ember.Component.extend(ScrollingMixin, {
   appNav: Ember.inject.service(),
   classNames: ['app'],
   classNameBindings: ['scrolled', 'shown', 'collapsed'],
+  store: Ember.inject.service(),
   tagName: 'nav',
 
   init() {
     this._super(...arguments);
 
-    this.get('appNav').on('show', () => {
-      this.set('loaded', true);
+    this.get('store').findRecord('attribute', 'logoUrl').then((logoUrl) => {
+      this.set('logoUrl', logoUrl.get('value'));
+
+      Ember.run.later(this, () => {
+        this.set('loaded', true);
+      }, 1000);
+    }).catch((error) => {
+      this.handleError(error);
     });
   },
 
