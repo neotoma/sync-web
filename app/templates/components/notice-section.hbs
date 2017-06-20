@@ -1,0 +1,9 @@
+<h1>{{header}}</h1>
+
+{{#if body}}
+  <p>{{body}}</p>
+{{/if}}
+
+{{#if hasButton}}
+  <button {{action (route-action buttonAction)}}>{{buttonLabel}}</button>
+{{/if}}

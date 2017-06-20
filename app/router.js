@@ -13,6 +13,7 @@ Router.map(function() {
   this.route('storages-picker');
   this.route('sources-picker');
   this.route('cart');
+  this.route('contact-verification-request', { path: '/contact-verification-requests/:id' });
 });
 
 export default Router;

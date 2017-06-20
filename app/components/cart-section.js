@@ -33,15 +33,14 @@ export default Ember.Component.extend({
               }
             }
           }).then((jobs) => {
-            if (jobs.get('length') === 0) {
+            if (!jobs.get('length')) {
               this.createJobs();
             }
 
-            this.get('routing').transitionTo('index');
-            this.set('isConsideringTransition', false);
+            this.transition();
           });
         } else {
-          this.set('isConsideringTransition', false);
+          this.transition();
         }
       });
     }
@@ -64,18 +63,32 @@ export default Ember.Component.extend({
     });
   },
 
+  transition() {
+    this.get('routing').transitionTo('index');
+    this.set('isConsideringTransition', false);
+  },
+
   actions: {
     createNotificationRequests: function() {
+      if (!this.get('email') && !this.get('sessions.user')) { return; }
+
       return new Promise((resolve, reject) => {
         this.transitionPromise(() => {
-          if (this.get('email')) {
-            this.get('cart').removeAllServices().then(() => {
-              this.set('sessions.createdNotificationRequests', true);
-              resolve();
-            }).catch(reject);
+          if (!this.get('sessions.user')) {
+            this.get('store').createRecord('contactVerificationRequest', {
+              authenticateSession: true,
+              clientOrigin: window.location.origin,
+              contact: this.get('email'),
+              createUser: true,
+              method: 'email',
+              session: this.get('sessions.sessions.firstObject.id')
+            }).save().then((contactVerificationRequest) => {
+              this.get('cart').removeAllServices().then(() => {
+                resolve();
+              }).catch(reject);
+            });
           } else {
             this.get('cart').createNotificationRequests().then(() => {
-              this.set('sessions.createdNotificationRequests', true);
               this.considerTransition();
               resolve();
             }).catch(reject);
@@ -84,9 +97,10 @@ export default Ember.Component.extend({
       });
     },
 
-    removeAllServices: function() {
+    declineNotificationRequests: function() {
+      this.set('cart.declinedNotificationRequests', true);
+
       this.transitionPromise(() => {
-        this.set('sessions.noCreatedNotificationRequests', true);
         return this.get('cart').removeAllServices();
       });
     }
