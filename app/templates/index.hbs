@@ -1,17 +1,11 @@
-{{#if hasUserAuth}}
+{{#if hasBothUserAuth}}
   {{dashboard-section}}
-{{else if sessions.createdNotificationRequests}}
-  <section class="cart loaded">
-    <h1>We’ll be in touch</h1>
-    <p>Expect to receive emails as soon as we roll out support.</p>
-    <p>We appreciate your interest!</p>
-  </section>
-{{else if sessions.noCreatedNotificationRequests}}
-  <section class="cart loaded">
-    <h1>Sorry we couldn’t be more helpful!</h1>
-    <p>View the options again to see if there are others that might interest you.</p>
-    {{#link-to 'storages-picker' class="subtle"}}View options{{/link-to}}
-  </section>
+{{else if hasUnverifiedContactVerificationRequest}}
+  {{notice-section header='We\'ve sent you an email' body="Please open it and click the link inside to verify your address before we can notify you of support."}}
+{{else if hasNotificationRequest}}
+  {{notice-section header='We\'ll be in touch!' body="Expect to receive an email as soon as we roll out support. We appreciate your interest!"}}
+{{else if cart.declinedNotificationRequests}}
+  {{notice-section header="Sorry we couldn’t be more helpful!" body="View the options again to see if there are others that might interest you." buttonLabel="View options" buttonAction="viewStoragesPicker"}}
 {{else}}
   {{intro-section}}
 {{/if}}

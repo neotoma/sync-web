@@ -2,10 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Service.extend({
   store: Ember.inject.service(),
-  userAuthModelNames: {
-    source: 'userSourceAuth',
-    storage: 'userStorageAuth'
-  },
 
   loadSessions: function() {
     return new Promise((resolve, reject) => {
@@ -28,7 +24,12 @@ export default Ember.Service.extend({
         return resolve();
       }
 
-      this.get('store').query(this.get('userAuthModelNames')[modelName], {
+      var userAuthModelNames = {
+        source: 'userSourceAuth',
+        storage: 'userStorageAuth'
+      };
+
+      this.get('store').query(userAuthModelNames[modelName], {
         filter: {
           relationships: {
             user: {
@@ -76,11 +77,46 @@ export default Ember.Service.extend({
         this.userAuths('source'),
         this.userAuths('storage')
       ]).then((userAuthCollections) => {
-        if (userAuthCollections[0].get('length') && userAuthCollections[1].get('length')) {
-          return resolve(true);
-        }
+        return resolve((userAuthCollections[0].get('length') && userAuthCollections[1].get('length')));
+      }).catch(reject);
+    });
+  },
 
-        resolve(false);
+  /**
+   * Indicates whether session has at least one contactVerificationRequest object
+   */
+  hasUnverifiedContactVerificationRequest() {
+    return new Promise((resolve, reject) => {
+      this.get('store').query('contactVerificationRequest', {
+        filter: {
+          attributes: {
+            verified: false
+          }
+        }
+      }).then((contactVerificationRequests) => {
+        resolve((contactVerificationRequests.get('length')));
+      }).catch(reject);
+    });
+  },
+
+  /**
+   * Indicates whether session user has at least one notificationRequest object
+   */
+  hasNotificationRequest() {
+    return new Promise((resolve, reject) => {
+      if (!this.get('user')) { return resolve(false); }
+
+      this.get('store').query('notificationRequest', {
+        filter: {
+          relationships: {
+            user: {
+              id: this.get('user.id'),
+              type: 'users'
+            }
+          }
+        }
+      }).then((notificationRequests) => {
+        resolve((notificationRequests.get('length')));
       }).catch(reject);
     });
   },

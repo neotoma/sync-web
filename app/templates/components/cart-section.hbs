@@ -23,7 +23,7 @@
   {{#if sessions.user}}
     <form>
       <button {{action "createNotificationRequests"}}>Yes, please!</button>
-      <button {{action "removeAllServices"}}>No, thanks</button>
+      <button {{action "declineNotificationRequests"}}>No, thanks</button>
     </form>
   {{else}}
     <form>
