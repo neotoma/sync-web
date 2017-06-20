@@ -28,19 +28,15 @@ export default Ember.Service.extend({
         return resolve();
       }
 
-      var userAuthModelName = this.get('userAuthModelNames')[modelName];
-
-      var filter = {
-        relationships: {
-          user: {
-            id: this.get('user.id'),
-            type: 'users'
+      this.get('store').query(this.get('userAuthModelNames')[modelName], {
+        filter: {
+          relationships: {
+            user: {
+              id: this.get('user.id'),
+              type: 'users'
+            }
           }
         }
-      };
-
-      this.get('store').query(userAuthModelName, {
-        filter: filter
       }).then((userAuths) => {
         resolve(userAuths);
       }).catch(reject);

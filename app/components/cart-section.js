@@ -18,7 +18,9 @@ export default Ember.Component.extend({
   },
 
   considerTransition() {
-    if (!this.get('cart.services.length')) {
+    if (!this.get('cart.services.length') && !this.get('isConsideringTransition')) {
+      this.set('isConsideringTransition', true);
+
       this.get('sessions').hasUserAuth().then((hasUserAuth) => {
         if (hasUserAuth) {
           this.get('store').query('job', {
@@ -36,7 +38,10 @@ export default Ember.Component.extend({
             }
 
             this.get('routing').transitionTo('index');
+            this.set('isConsideringTransition', false);
           });
+        } else {
+          this.set('isConsideringTransition', false);
         }
       });
     }
