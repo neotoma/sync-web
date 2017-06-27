@@ -87,6 +87,8 @@ export default Ember.Service.extend({
    */
   hasUnverifiedContactVerificationRequest() {
     return new Promise((resolve, reject) => {
+      if (!this.get('user')) { return resolve(false); }
+      
       this.get('store').query('contactVerificationRequest', {
         filter: {
           attributes: {
