@@ -82,7 +82,7 @@ export default Ember.Component.extend({
               createUser: true,
               method: 'email',
               session: this.get('sessions.sessions.firstObject.id')
-            }).save().then((contactVerificationRequest) => {
+            }).save().then(() => {
               this.get('cart').removeAllServices().then(() => {
                 resolve();
               }).catch(reject);
