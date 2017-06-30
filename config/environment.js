@@ -18,9 +18,9 @@ module.exports = function(environment) {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
-      },
-      transitionDelay: 500
+      }
     },
+    transitionDelay: 500,
 
     APP: {}
   };

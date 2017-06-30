@@ -1,9 +1,9 @@
 import Ember from 'ember';
+import config from '../config/environment';
 
 export default Ember.Mixin.create({
   classNameBindings: ['loaded', 'hidden', 'error', 'empty'],
   tagName: 'div',
-  transitionDelay: window.EmberENV.transitionDelay,
 
   handleError(error) {
     console.error(error.message);
@@ -27,6 +27,6 @@ export default Ember.Mixin.create({
       }).catch(() => {
         this.set('error', true);
       });
-    }, this.get('transitionDelay'));
+    }, config.transitionDelay);
   }
 });

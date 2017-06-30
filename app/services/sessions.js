@@ -3,14 +3,12 @@ import Ember from 'ember';
 export default Ember.Service.extend({
   store: Ember.inject.service(),
 
-  loadSessions: function() {
+  loadAll: function() {
     return new Promise((resolve, reject) => {
       this.get('store').findAll('session', { include: 'users,userSourceAuths,userStorageAuths' }).then((sessions) => {
         this.set('sessions', sessions);
-        resolve();
-      }).catch((error) => {
-        reject(error);
-      });
+        resolve(sessions);
+      }).catch(reject);
     });
   },
 
