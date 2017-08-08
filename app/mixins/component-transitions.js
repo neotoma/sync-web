@@ -1,9 +1,9 @@
 import Ember from 'ember';
+import config from '../config/environment';
 
 export default Ember.Mixin.create({
-  classNameBindings: ['loaded', 'hidden', 'error', 'empty'],
+  classNameBindings: ['loaded', 'reloading', 'hidden', 'error', 'empty'],
   tagName: 'div',
-  transitionDelay: window.EmberENV.transitionDelay,
 
   handleError(error) {
     console.error(error.message);
@@ -19,14 +19,20 @@ export default Ember.Mixin.create({
    * @param {function} executor
    */
   transitionPromise(executor) {
-    this.set('loaded', false);
+    this.set('reloading', true);
 
     Ember.run.later(() => {
       new Promise(executor).then(() => {
-        this.set('loaded', true);
+        if (!this.get('isDestroyed')) {
+          this.set('reloading', false);
+        }
       }).catch(() => {
+        if (!this.get('isDestroyed')) {
+          this.set('reloading', false);
+        }
+
         this.set('error', true);
       });
-    }, this.get('transitionDelay'));
+    }, config.transitionDelay);
   }
 });

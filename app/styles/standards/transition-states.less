@@ -1,36 +1,6 @@
 .standard-transition-states {
-  transition: opacity 0.5s;
-
-  &:before {
-    animation: shimmer 0.75s infinite linear;
-    animation-fill-mode: forwards;
-    background: linear-gradient(120deg, rgba(255,255,255,0.25), transparent, rgba(255,255,255,0.25), transparent, rgba(255,255,255,0.25));
-    background-size: 200% 200%;
-    content: '';
-    display: none;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1;
-  }
-
-  &:not(.loaded):before, &:not(.loaded) p.placeholder:before, &.pending:before {
-    display: block;
-  }
-
-  &.hidden {
+  & > * {
+    animation: opacity-fadein @animation-length forwards;
     opacity: 0;
-    transition: opacity 0.5s;
-
-    &>* {
-      opacity: 0;
-      transition: opacity 0.5s;
-    }
-  }
-
-  &.empty, &.error {
-    display: none;
   }
 }

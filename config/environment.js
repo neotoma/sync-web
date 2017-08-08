@@ -18,9 +18,12 @@ module.exports = function(environment) {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
-      },
-      transitionDelay: 500
+      }
     },
+    segment: {
+      WRITE_KEY: process.env.SYNC_WEB_SEGMENT_WRITE_KEY
+    },
+    transitionDelay: 500,
 
     APP: {}
   };

@@ -1,11 +1,15 @@
 section.picker {
+  .standard-transition-states;
+  margin: 0 4em;
+  min-height: 10em;
+
   ul {
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
     list-style: none;
-    margin: 0;
-    padding: 2em 4em 4em 4em;
+    margin: 2em 0 4em 0;
+    padding: 0;
 
     ::selection {
       background: none;
@@ -17,6 +21,7 @@ section.picker {
       box-sizing: border-box;
       line-height: 1em;
       margin: 1em;
+      min-height: 4.8em;
       text-align: left;
       transition: transform @transition;
       width: ~"calc(100% / 3 - 2em)";
@@ -31,15 +36,18 @@ section.picker {
 
       label {
         @font-size: 1.5em;
+        animation: opacity-fadein @animation-length forwards;
         display: block;
         cursor: pointer;
         font-family: "Avenir-Light";
         font-size: @font-size;
         line-height: 1em;
+        opacity: 0;
         overflow: hidden;
         padding: 1.1em 1.1em 1.1em 4em;
         position: relative;
         text-overflow: ellipsis;
+        transition: opacity @animation-length;
         white-space: nowrap;
 
         &:before {
@@ -65,6 +73,14 @@ section.picker {
         background-size: 1em 1em;
         border-color: white;
       }
+    }
+  }
+
+  &:not(.loaded) ul li {
+    animation: opacity-pulse 0.75s infinite;
+
+    &:hover {
+      transform: none;
     }
   }
 }

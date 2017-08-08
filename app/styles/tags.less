@@ -10,6 +10,12 @@ a:focus {
   .standard-link-focus;
 }
 
+blockquote {
+  background: rgba(0,0,0,0.1);
+  margin: 2em;
+  padding: 2em;
+}
+
 body {
   .standard-text;
   background: linear-gradient(#A029FF, #8D00FF) no-repeat 100% fixed;
@@ -119,12 +125,7 @@ p {
 }
 
 section, table {
-  opacity: 0;
   transition: opacity @transition;
-
-  &.loaded {
-    opacity: 1;
-  }
 
   &.hidden {
     opacity: 0;

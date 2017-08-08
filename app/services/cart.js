@@ -23,12 +23,9 @@ export default Ember.Service.extend({
   },
 
   removeAllServices() {
-    return new Promise((resolve) => {
-      this.set('sources', []);
-      this.set('storages', []);
-      this.updateLocalStorage();
-      resolve();
-    });
+    this.set('sources', []);
+    this.set('storages', []);
+    this.updateLocalStorage();
   },
 
   removeService(service) {
@@ -37,32 +34,28 @@ export default Ember.Service.extend({
   },
 
   pruneAllServices() {
-    return new Promise((resolve, reject) => {
-      Promise.all([
-        this.pruneServices('source'),
-        this.pruneServices('storage')
-      ]).then(resolve).catch(reject);
-    });
+    return Promise.all([
+      this.pruneServices('source'),
+      this.pruneServices('storage')
+    ]);
   },
 
   pruneServices(modelName) {
-    return new Promise((resolve, reject) => {
-      if (!this.get('sessions.user')) { return resolve(); }
+    if (!this.get('sessions.user')) { return Promise.resolve(); }
 
-      var promises = [];
+    var promises = [];
 
-      this.get(pluralize(modelName)).forEach((service) => {
-        var promise = this.get('sessions').hasUserServiceAuth(service).then((isAuthed) => {
-          if (isAuthed) {
-            this.removeService(service);
-          }
-        });
-
-        promises.push(promise);
+    this.get(pluralize(modelName)).forEach((service) => {
+      var promise = this.get('sessions').hasUserServiceAuth(service).then((isAuthed) => {
+        if (isAuthed) {
+          return this.removeService(service);
+        }
       });
 
-      Promise.all(promises).then(resolve).catch(reject);
+      promises.push(promise);
     });
+
+    return Promise.all(promises);
   },
 
   updateLocalStorage() {
@@ -72,51 +65,44 @@ export default Ember.Service.extend({
   },
 
   loadAllServices() {
-    return new Promise((resolve, reject) => {
-      Promise.all([
-        this.loadServices('source'),
-        this.loadServices('storage')
-      ]).then(() => {
-        this.pruneAllServices().then(resolve).catch(reject);
-      }).catch(reject);
-    });
+    return Promise.all([
+      this.loadServices('source'),
+      this.loadServices('storage')
+    ]).then(() => { return this.pruneAllServices(); });
   },
 
   loadServices(modelName) {
-    return new Promise((resolve, reject) => {
-      if (!this.get('localStorage').getItem(pluralize(modelName))) { return resolve(); }
+    if (!this.get('localStorage').getItem(pluralize(modelName))) { return Promise.resolve(); }
 
-      var promises = [];
+    var promises = [];
 
-      JSON.parse(this.get('localStorage').getItem(pluralize(modelName))).forEach((id) => {
-        var promise = this.get('store').findRecord(modelName, id).then((service) => {
-          service.set('isSelected', true);
-          this.addService(service);
-        }).catch((error) => {
-          console.error(`Unable to load ${modelName} record from localStorage`, error);
-        });
-
-        promises.push(promise);
+    JSON.parse(this.get('localStorage').getItem(pluralize(modelName))).forEach((id) => {
+      var promise = this.get('store').findRecord(modelName, id).then((service) => {
+        service.set('isSelected', true);
+        this.addService(service);
+        return service;
+      }).catch((error) => {
+        console.error(`Unable to load ${modelName} record from localStorage`, error);
       });
 
-      Promise.all(promises).then(resolve).catch(reject);
+      promises.push(promise);
     });
+
+    return Promise.all(promises);
   },
 
   createNotificationRequests() {
-    return new Promise((resolve, reject) => {
-      Promise.all(this.get('disabledServices').map((service) => {
-        var attributes = {
-          event: 'Item storage enabled',
-          user: this.get('sessions.user')
-        };
+    return Promise.all(this.get('disabledServices').map((service) => {
+      var attributes = {
+        event: 'Item storage enabled',
+        user: this.get('sessions.user')
+      };
 
-        attributes[service.constructor.modelName] = service;
+      attributes[service.constructor.modelName] = service;
 
-        return this.get('store').createRecord('notificationRequest', attributes).save();
-      })).then(() => {
-        this.removeAllServices().then(resolve).catch(reject);
-      }).catch(reject);
+      return this.get('store').createRecord('notificationRequest', attributes).save();
+    })).then(() => {
+      return this.removeAllServices();
     });
   },
 

@@ -5,7 +5,7 @@ div.item {
   height: 0;
   opacity: 0;
   padding: 1.5em;
-  transition: opacity 0.5s, transform 0.5s, height 0.5s;
+  transition: opacity @animation-length, transform @animation-length, height @animation-length;
 
   &.loaded {
     height: 12em;

@@ -1,11 +1,17 @@
 section.dashboard {
+  .standard-transition-states;
   display: flex;
   padding: 3em;
+
+  &:not(.loaded) * {
+    display: none;
+    opacity: 0;
+  }
   
   div.services {
-    border-right: 1px solid @standard-border-color;
-    margin-right: 3em;
-    padding-right: 3em;
+    border-left: 1px solid @standard-border-color;
+    margin-left: 3em;
+    padding-left: 3em;
     width: 20em;
 
     h2 {
@@ -26,7 +32,16 @@ section.dashboard {
   }
 
   div.items {
+    position: relative;
     width: ~"calc(100% - 20em)";
+
+    section.notice {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      width: inherit;
+    }
   }
 
   div.start {

@@ -9,7 +9,7 @@ export default Ember.Component.extend({
   store: Ember.inject.service(),
   tagName: 'section',
 
-  willRender() {
+  init() {
     this._super(...arguments);
 
     this.get('store').findAll(this.get('modelName')).then((services) => {

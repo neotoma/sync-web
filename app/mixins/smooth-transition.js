@@ -1,7 +1,7 @@
 import Ember from 'ember';
+import config from '../config/environment';
 
 export default Ember.Mixin.create({
-  transitionDelay: window.EmberENV.transitionDelay,
   componentEvents: Ember.inject.service(),
   appNav: Ember.inject.service(),
 
@@ -40,6 +40,7 @@ export default Ember.Mixin.create({
   actions: {
     willTransition: function(transition) {
       this._super.apply(this, arguments);
+
       if (this.get('routeName') === 'application') {
         return true;
       }
@@ -56,7 +57,7 @@ export default Ember.Mixin.create({
 
         Ember.run.later(transition, function() {
           transition.retry();
-        }, this.get('transitionDelay'));
+        }, config.transitionDelay);
       }
     }
   }

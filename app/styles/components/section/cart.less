@@ -1,4 +1,39 @@
 section.cart {
+  .standard-transition-states;
+
+  div.loading-indicator {
+    display: none;
+  }
+
+  & > * {
+    transition: opacity @animation-length;
+  }
+
+  &:not(.loaded) {
+    & > *:not(.loading-indicator) {
+      animation: none;
+      opacity: 0;
+    }
+
+    div.loading-indicator {
+      display: block;
+    }
+  }
+
+  &.reloading {
+    & > *:not(.loading-indicator) {
+      animation: opacity-fadeout @animation-length forwards;
+      opacity: 0;
+    }
+
+    div.loading-indicator {
+      animation: opacity-fadein @animation-length forwards;
+      animation-delay: 1.5s;
+      display: block;
+      opacity: 0;
+    }
+  }
+
   p {
     margin: 1em auto auto auto;
     max-width: 500px;

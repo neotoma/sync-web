@@ -1,21 +1,14 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  cart: Ember.inject.service(),
   sessionsService: Ember.inject.service('sessions'),
 
   model() {
     return Promise.all([
-      this.get('sessionsService').hasBothUserAuth(),
-      this.get('sessionsService').hasUnverifiedContactVerificationRequest(),
-      this.get('sessionsService').hasNotificationRequest()
+      this.get('sessionsService.jobs'),
+      this.get('sessionsService.userSourceAuths'),
+      this.get('sessionsService.userStorageAuths')
     ]);
-  },
-
-  setupController(controller, model) {
-    controller.set('hasBothUserAuth', model[0]);
-    controller.set('hasUnverifiedContactVerificationRequest', model[1]);
-    controller.set('hasNotificationRequest', model[2]);
   },
 
   actions: {
