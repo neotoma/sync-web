@@ -7,7 +7,6 @@ export default Ember.Service.extend(Ember.Evented, {
 
   init() {
     this._super(...arguments);
-
     this.set('socket', this.get('socketIOService').socketFor('https://' + window.EmberENV.API_HOST));
   },
 

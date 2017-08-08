@@ -8,6 +8,7 @@ const Router = Ember.Router.extend({
 Router.map(function() {
   this.route('cart');
   this.route('contact-verification-request', { path: '/contact-verification-requests/:id' });
+  this.route('contact-verification-requests');
   this.route('sources');
   this.route('source', { path: '/sources/:id' });
   this.route('sources-picker');

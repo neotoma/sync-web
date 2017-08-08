@@ -1,11 +1,9 @@
-{{#if hasBothUserAuth}}
+{{#if sessionsService.hasJobsToStart}}
+  {{create-jobs-section}}
+{{else if sessionsService.jobs}}
   {{dashboard-section}}
-{{else if hasUnverifiedContactVerificationRequest}}
-  {{notice-section header='We\'ve sent you an email' body="Please open it and click the link inside to verify your address before we can notify you of support."}}
-{{else if hasNotificationRequest}}
-  {{notice-section header='We\'ll be in touch!' body="Expect to receive an email as soon as we roll out support. We appreciate your interest!"}}
 {{else if cart.declinedNotificationRequests}}
-  {{notice-section header="Sorry we couldn’t be more helpful!" body="View the options again to see if there are others that might interest you." buttonLabel="View options" buttonAction="viewStoragesPicker"}}
+  {{notice-section header="Sorry we couldn’t be more helpful!" body="If you'd like, you can view the options again to see if there are others that might interest you." buttonLabel="View options" buttonRouteAction="viewStoragesPicker"}}
 {{else}}
   {{intro-section}}
 {{/if}}

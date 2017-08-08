@@ -1,140 +1,91 @@
+import _ from 'npm:lodash';
 import Ember from 'ember';
+import {pluralize} from 'ember-inflector';
 
 export default Ember.Service.extend({
   store: Ember.inject.service(),
 
-  loadAll: function() {
-    return new Promise((resolve, reject) => {
-      this.get('store').findAll('session', { include: 'users,userSourceAuths,userStorageAuths' }).then((sessions) => {
-        this.set('sessions', sessions);
-        resolve(sessions);
-      }).catch(reject);
+  hasJobsToStart: Ember.computed('sourcesWithoutJobs.[]', 'userStorageAuths.[]', function() {
+    return (this.get('sourcesWithoutJobs.length') && this.get('userStorageAuths'));
+  }),
+
+  init() {
+    this._super(...arguments);
+    this.set('contactVerificationRequests', this.get('store').findAll('contactVerificationRequest'));
+    this.set('sessions', this.get('store').findAll('session', { include: 'users,userSourceAuths,userStorageAuths' }));
+    this.initRelatedRecords();
+  },
+
+  initRelatedRecords() {
+    [ 'job',
+      'userSourceAuth',
+      'userStorageAuth'
+    ].forEach((modelName) => {
+      this.set(pluralize(modelName), Ember.computed('user', function() {
+        return this.userRelatedRecords(modelName);
+      }));
     });
   },
+
+  sources: Ember.computed('userSourceAuths.[]', function() {
+    if (!this.get('userSourceAuths')) { return; }
+    return this.get('userSourceAuths').map((auth) => auth.get('source'));
+  }),
+
+  sourcesWithoutJobs: Ember.computed('sources.[]', 'jobs.[]', function() {
+    if (!this.get('sources')) { return; }
+
+    var sources = [];
+
+    this.get('sources').forEach((source) => {
+      if (!this.get('jobs').findBy('source.id', source.get('id'))) {
+        sources.push(source);
+      };
+    });
+
+    return sources;
+  }),
+
+  storages: Ember.computed('userStorageAuths.[]', function() {
+    if (!this.get('userStorageAuths')) { return; }
+    return this.get('userStorageAuths').map((auth) => auth.get('storage'));
+  }),
 
   user: Ember.computed('sessions.firstObject.users.firstObject', function() {
     return this.get('sessions.firstObject.users.firstObject');
   }),
 
-  userAuths(modelName) {
-    return new Promise((resolve, reject) => {
-      if (!this.get('user.id')) {
-        return resolve();
-      }
-
-      var userAuthModelNames = {
-        source: 'userSourceAuth',
-        storage: 'userStorageAuth'
-      };
-
-      this.get('store').query(userAuthModelNames[modelName], {
-        filter: {
-          relationships: {
-            user: {
-              id: this.get('user.id'),
-              type: 'users'
-            }
-          }
-        }
-      }).then((userAuths) => {
-        resolve(userAuths);
-      }).catch(reject);
-    });
-  },
-
   /**
-   * Indicates whether session user has at least one associated authentication object
+   * Queries store for records related to session user
+   * @param (string) modelName - Name of model for records to query
    */
-  hasUserAuth() {
-    return new Promise((resolve, reject) => {
-      if (!this.get('user')) { return resolve(false); }
-      
-      Promise.all([
-        this.userAuths('source'),
-        this.userAuths('storage')
-      ]).then((userAuthCollections) => {
-        userAuthCollections.forEach((userAuths) => {
-          if (userAuths.get('length')) {
-            return resolve(true);
-          }
-        });
+  userRelatedRecords(modelName) {      
+    if (!modelName || !this.get('user')) { return; }
 
-        resolve(false);
-      }).catch(reject);
-    });
+    return this.get('store').findAll(modelName);
   },
 
   /**
    * Indicates whether session user has at least one associated authentication object per type of auth
    */
-  hasBothUserAuth() {
-    return new Promise((resolve, reject) => {
-      if (!this.get('user')) { return resolve(false); }
-      
-      Promise.all([
-        this.userAuths('source'),
-        this.userAuths('storage')
-      ]).then((userAuthCollections) => {
-        return resolve((userAuthCollections[0].get('length') && userAuthCollections[1].get('length')));
-      }).catch(reject);
-    });
-  },
-
-  /**
-   * Indicates whether session has at least one contactVerificationRequest object
-   */
-  hasUnverifiedContactVerificationRequest() {
-    return new Promise((resolve, reject) => {
-      if (!this.get('user')) { return resolve(false); }
-      
-      this.get('store').query('contactVerificationRequest', {
-        filter: {
-          attributes: {
-            verified: false
-          }
-        }
-      }).then((contactVerificationRequests) => {
-        resolve((contactVerificationRequests.get('length')));
-      }).catch(reject);
-    });
-  },
-
-  /**
-   * Indicates whether session user has at least one notificationRequest object
-   */
-  hasNotificationRequest() {
-    return new Promise((resolve, reject) => {
-      if (!this.get('user')) { return resolve(false); }
-
-      this.get('store').query('notificationRequest', {
-        filter: {
-          relationships: {
-            user: {
-              id: this.get('user.id'),
-              type: 'users'
-            }
-          }
-        }
-      }).then((notificationRequests) => {
-        resolve((notificationRequests.get('length')));
-      }).catch(reject);
-    });
-  },
+  hasUserSourceAndStorageAuth: Ember.computed('userSourceAuths.[]', 'userStorageAuths.[]', function() {
+    return (this.get('userSourceAuths.length') && this.get('userStorageAuths.length'));
+  }),
 
   /**
    * Indicates whether session user has associated authenticated object for given service
    */
   hasUserServiceAuth(service) {
-    return new Promise((resolve, reject) => {
-      this.userAuths(service.constructor.modelName).then((userAuths) => {
-        userAuths.forEach((userAuth) => {
-          if (userAuth.get(service.constructor.modelName).get('id') === service.get('id')) {
-            return resolve(true);
-          }
-        });
+    return this.get(`user${_.upperFirst(service.constructor.modelName)}Auths`).then((userAuths) => {
+      var found = false;
 
-        resolve(false);
-      }).catch(reject);
+      userAuths.forEach((userAuth) => {
+        if (userAuth.get(service.constructor.modelName).get('id') === service.get('id')) {
+          found = true;
+        }
+      });
+
+      return found;
     });
   }
 });

@@ -4,15 +4,21 @@ export default Ember.Component.extend({
   tagName: 'section',
   classNames: ['notice'],
 
-  init() {
+  init(loaded) {
     this._super(...arguments);
 
-    Ember.run.next(() => {
-      this.set('loaded', true);
-    });
+    if (loaded !== false) {
+      Ember.run.next(() => {
+        this.set('loaded', true);
+      });
+    }
   },
 
   hasButton: Ember.computed('buttonLabel', 'buttonAction', function() {
     return (this.get('buttonLabel') && this.get('buttonAction'));
+  }),
+
+  hasRouteButton: Ember.computed('buttonLabel', 'buttonRouteAction', function() {
+    return (this.get('buttonLabel') && this.get('buttonRouteAction'));
   })
 });

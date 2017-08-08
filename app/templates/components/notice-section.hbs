@@ -5,5 +5,7 @@
 {{/if}}
 
 {{#if hasButton}}
-  <button {{action (route-action buttonAction)}}>{{buttonLabel}}</button>
+  <button {{action buttonAction}}>{{buttonLabel}}</button>
+{{else if hasRouteButton}}
+  <button {{action (route-action buttonRouteAction)}}>{{buttonLabel}}</button>
 {{/if}}

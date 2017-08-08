@@ -1,9 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  sessions: Ember.inject.service(),
+  sessionsService: Ember.inject.service('sessions'),
 
   beforeModel: function() {
-    return this.get('sessions').loadAll();
+    return this.get('sessionsService.sessions');
   }
 });

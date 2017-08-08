@@ -20,6 +20,9 @@ module.exports = function(environment) {
         // e.g. 'with-controller': true
       }
     },
+    segment: {
+      WRITE_KEY: process.env.SYNC_WEB_SEGMENT_WRITE_KEY
+    },
     transitionDelay: 500,
 
     APP: {}

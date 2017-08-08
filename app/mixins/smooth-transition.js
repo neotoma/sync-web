@@ -40,6 +40,7 @@ export default Ember.Mixin.create({
   actions: {
     willTransition: function(transition) {
       this._super.apply(this, arguments);
+
       if (this.get('routeName') === 'application') {
         return true;
       }

@@ -1,5 +1,5 @@
-{{#unless verified}}
-  {{notice-section header="Please hit the following button to verify your address" buttonLabel="Verify address" buttonAction="verifyAddress"}}
+{{#if contactVerification}}
+  {{notice-section header="Thanks for verifying your address!" body="Expect to receive an email as soon as we roll out support. We appreciate your interest!"}}
 {{else}}
-  {{notice-section header="Thanks for verifying your address!" body="We'll be in touch."}}
-{{/unless}}
+  {{verify-contact-section contactVerificationRequest=contactVerificationRequest}}
+{{/if}}

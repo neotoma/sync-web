@@ -14,6 +14,7 @@ See also documentation for [the Neotoma project](https://github.com/neotoma/docu
 The code requires the following environment variables to run or deploy the app. They can be declared by adding a file named `.env` (in [INI format](https://en.wikipedia.org/wiki/INI_file)) to the base directory, assuming they're not declared elsewhere in the system already. Such a file will be ignored by Git.
 
 - `SYNC_WEB_API_HOST`: Host address of sync-server (e.g. `127.0.0.1:9090`; required to run app).
+- `SYNC_WEB_SEGMENT_WRITE_KEY`: [Segment](https://segment.com) write key (optional to run app).
 - `SYNC_WEB_DEPLOY_API_HOST`: Host address of sync-server for deployed app (required to deploy app).
 - `SYNC_WEB_DEPLOY_HOST`: Host for deployment (required to deploy app).
 - `SYNC_WEB_DEPLOY_USER`: Host user for deployment (required to deploy app).

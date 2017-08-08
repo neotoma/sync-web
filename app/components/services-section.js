@@ -6,19 +6,13 @@ export default Ember.Component.extend({
   sortedProperties: ['name:asc'],
   sortedServices: Ember.computed.sort('services', 'sortedProperties'),
   store: Ember.inject.service(),
-  sessions: Ember.inject.service(),
+  sessionsService: Ember.inject.service('sessions'),
   tagName: 'section',
 
   init() {
     this._super(...arguments);
-
     this.set('classNames', [this.get('pluralModelName')]);
-
-    this.get('sessions').userAuths(this.get('modelName')).then((userAuths) => {
-      this.set('services', userAuths.map((userAuth) => userAuth.get(this.get('modelName'))));
-    }).catch((error) => {
-      this.handleError(error);
-    });
+    this.set('services', this.get('sessionsService').get(pluralize(this.get('modelName'))));
   },
 
   hasServices: Ember.computed('services.[]', function() {

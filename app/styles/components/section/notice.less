@@ -1,4 +1,16 @@
 section.notice {
+  .standard-transition-states;
+  opacity: 0;
+  padding: 64px;
+
+  &.loaded:not(.hidden):not(.reloading) {
+    opacity: 1;
+  }
+
+  h1 {
+    margin-top: 0;
+  }
+  
   p {
     margin: 1em auto auto auto;
     max-width: 500px;
