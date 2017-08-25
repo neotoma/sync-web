@@ -51,6 +51,7 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     ENV.EmberENV.API_HOST = process.env.SYNC_WEB_DEPLOY_API_HOST;
+    ENV.segment.WRITE_KEY = process.env.SYNC_WEB_DEPLOY_SEGMENT_WRITE_KEY;
   }
 
   return ENV;
