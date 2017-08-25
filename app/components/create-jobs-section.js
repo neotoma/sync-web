@@ -1,7 +1,6 @@
 import { arrayToString } from 'sync-web/helpers/array-to-string';
 import Ember from 'ember';
 import NoticeSectionComponent from './notice-section';
-import wf from 'sync-web/utils/waterfall'
 
 export default NoticeSectionComponent.extend({
   buttonAction: 'createJobs',
@@ -28,7 +27,7 @@ export default NoticeSectionComponent.extend({
 
   actions: {
     createJobs() {
-      this.transitionPromise((resolve, reject) => {
+      this.transitionPromise((resolve) => {
         this.get('sessionsService.storages').forEach((storage) => {
           this.get('sessionsService.sourcesWithoutJobs').forEach((source) => {
             this.get('store').createRecord('job', {

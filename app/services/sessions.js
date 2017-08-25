@@ -40,7 +40,7 @@ export default Ember.Service.extend({
     this.get('sources').forEach((source) => {
       if (!this.get('jobs').findBy('source.id', source.get('id'))) {
         sources.push(source);
-      };
+      }
     });
 
     return sources;

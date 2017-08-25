@@ -14,9 +14,7 @@ export default NoticeSectionComponent.extend({
         this.get('store').createRecord('contactVerification', {
           contactVerificationRequest: this.get('contactVerificationRequest'),
           contactVerificationRequestCode: this.get('contactVerificationRequest.code')
-        }).save().then((contactVerification) => {
-          resolve();
-        }).catch(reject);
+        }).save().then(resolve).catch(reject);
       });
     }
   }

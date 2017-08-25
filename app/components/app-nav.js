@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import ScrollingMixin from '../mixins/scrolling';
-import ImagesLoaded from 'npm:imagesloaded';
+import imagesLoaded from 'npm:imagesloaded';
 
 export default Ember.Component.extend(ScrollingMixin, {
   appNav: Ember.inject.service(),
@@ -15,7 +15,7 @@ export default Ember.Component.extend(ScrollingMixin, {
     this.get('store').findRecord('attribute', 'logoUrl').then((logoUrl) => {
       this.set('logoUrl', logoUrl.get('value'));
 
-      ImagesLoaded(this.get('element'), () => {
+      imagesLoaded(this.get('element'), () => {
         this.set('loaded', true);
       });
     }).catch((error) => {

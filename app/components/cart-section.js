@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import wf from 'sync-web/utils/waterfall'
+import wf from 'sync-web/utils/waterfall';
 
 export default Ember.Component.extend({
   cart: Ember.inject.service(),

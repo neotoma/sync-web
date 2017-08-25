@@ -3,7 +3,7 @@ import config from '../config/environment';
 
 export function initialize(/* application */) {
   Ember.$('body>div.loading-indicator').fadeOut(config.transitionDelay, function() {
-    $(this).remove();
+    Ember.$(this).remove();
   });
 }
 
