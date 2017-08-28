@@ -28,9 +28,24 @@ export default Ember.Component.extend({
     }
   },
 
+  enabledServiceProperties: Ember.computed('cart.enabledService', function() {
+    return {
+      service: this.get('cart.enabledService.id'),
+      serviceModelName: this.get('cart.enabledService.constructor.modelName'),
+      serviceName: this.get('cart.enabledService.name')
+    };
+  }),
+
   actions: {
     createNotificationRequests: function() {
       if (!this.get('email') && !this.get('sessions.user')) { return; }
+
+      this.get('segment').trackEvent('Requested notification of "Item storage enabled" for services', {
+        email: this.get('email'),
+        services: this.get('cart.services').map((service) => service.get('id')),
+        serviceModelNames: this.get('cart.services').map((service) => service.constructor.modelName),
+        serviceNames: this.get('cart.services').map((service) => service.get('name'))
+      });
 
       this.transitionPromise((resolve, reject) => {
         if (this.get('sessions.user')) {
@@ -69,10 +84,26 @@ export default Ember.Component.extend({
     },
 
     declineNotificationRequests: function() {
+      this.get('segment').trackEvent('Declined notification of "Item storage enabled" for services', {
+        services: this.get('cart.services').map((service) => service.get('id')),
+        serviceModelNames: this.get('cart.services').map((service) => service.constructor.modelName),
+        serviceNames: this.get('cart.services').map((service) => service.get('name'))
+      });
+
       this.set('cart.declinedNotificationRequests', true);
 
       this.transitionPromise((resolve) => {
         this.get('cart').removeAllServices();
+        this.considerTransition();
+        resolve();
+      });
+    },
+
+    skipService: function(service) {
+      this.get('segment').trackEvent('Skipped service auth', this.get('enabledServiceProperties'));
+
+      this.transitionPromise((resolve) => {
+        this.get('cart').removeService(service);
         this.considerTransition();
         resolve();
       });
