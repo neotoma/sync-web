@@ -6,9 +6,9 @@ export default Ember.Component.extend({
 
   init() {
     this._super(...arguments);
-    
+
     Ember.run.next(() => {
       this.set('loaded', true);
     });
-  },
+  }
 });

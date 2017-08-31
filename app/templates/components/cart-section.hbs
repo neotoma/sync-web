@@ -1,11 +1,11 @@
 {{#if cart.hasEnabledService}}
   <h1>Please grant {{cart.enabledService.name}} access</h1>
   <p>We need basic access to your account so we can place files representing your data there.</p>
-  <a href="{{cart.enabledService.authUrl}}">Grant access</a>
+  <a href="{{cart.enabledService.authUrl}}" {{action 'trackEvent' 'Started service auth' enabledServiceProperties}}>Grant access</a>
   <div class="privacy">
     <header>We value your privacy</header>
     <p>This access does not allow us to read any of your existing files on {{cart.enabledService.name}}. It simply lets us create and access a special “Neotoma” folder to store new files within it.</p>
-    <p>If you still don’t feel comfortable, you can <strong {{action cart.removeService cart.enabledService target=cart}}> skip {{cart.enabledService.name}}</strong>.</p>
+    <p>If you still don’t feel comfortable, you can <strong {{action 'skipService' cart.enabledService}}> skip {{cart.enabledService.name}}</strong>.</p>
   </div>
 {{else if cart.hasDisabledService}}
   {{#if cart.hasOneDisabledService}}

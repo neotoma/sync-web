@@ -3,6 +3,7 @@ import {pluralize} from 'ember-inflector';
 
 export default Ember.Service.extend({
   localStorage: localStorage,
+  segment: Ember.inject.service(),
   sessions: Ember.inject.service(),
   sources: [],
   storages: [],
@@ -48,6 +49,12 @@ export default Ember.Service.extend({
     this.get(pluralize(modelName)).forEach((service) => {
       var promise = this.get('sessions').hasUserServiceAuth(service).then((isAuthed) => {
         if (isAuthed) {
+          this.get('segment').trackEvent('Finished service auth', {
+            service: service.get('id'),
+            serviceModelName: service.constructor.modelName,
+            serviceName: service.get('name')
+          });
+
           return this.removeService(service);
         }
       });

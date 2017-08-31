@@ -27,15 +27,31 @@ export default NoticeSectionComponent.extend({
 
   actions: {
     createJobs() {
+      this.get('segment').trackEvent('Started backup', {
+        sourceNames: this.get('sessionsService.sourcesWithoutJobs').map((source) => source.get('name')),
+        sources: this.get('sessionsService.sourcesWithoutJobs').map((source) => source.get('id')),
+        storageNames: this.get('sessionsService.storages').map((storage) => storage.get('name')),
+        storages: this.get('sessionsService.storages').map((storage) => storage.get('id'))
+      })
+
       this.transitionPromise((resolve) => {
         this.get('sessionsService.storages').forEach((storage) => {
           this.get('sessionsService.sourcesWithoutJobs').forEach((source) => {
-            this.get('store').createRecord('job', {
+            var job = this.get('store').createRecord('job', {
               name: 'storeAllItemsForUserStorageSource',
               source: source,
               storage: storage,
               user: this.get('sessionsService.user')
-            }).save();
+            });
+
+            job.save().then(() => {
+              this.get('segment').trackEvent('Created job', {
+                jobId: job.get('id'),
+                jobName: job.get('name'),
+                sourceName: job.get('source.name'),
+                storageName: job.get('storage.name')
+              })
+            });
           });
         });
 

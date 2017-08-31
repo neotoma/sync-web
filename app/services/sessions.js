@@ -27,6 +27,10 @@ export default Ember.Service.extend({
     });
   },
 
+  session: Ember.computed('sessions.firstObject', function() {
+    return this.get('sessions.firstObject');
+  }),
+
   sources: Ember.computed('userSourceAuths.[]', function() {
     if (!this.get('userSourceAuths')) { return; }
     return this.get('userSourceAuths').map((auth) => auth.get('source'));
@@ -51,8 +55,8 @@ export default Ember.Service.extend({
     return this.get('userStorageAuths').map((auth) => auth.get('storage'));
   }),
 
-  user: Ember.computed('sessions.firstObject.users.firstObject', function() {
-    return this.get('sessions.firstObject.users.firstObject');
+  user: Ember.computed('session.users.firstObject', function() {
+    return this.get('session.users.firstObject');
   }),
 
   /**

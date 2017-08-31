@@ -2,13 +2,10 @@
 <ul>
   {{#if loaded}}
     {{#each sortedServices as |service|}}
-      <li>
-        {{input type="checkbox" id=(concat "service-" service.id) checked=service.isSelected}}
-        <label for="service-{{service.id}}">{{service.name}}</label>
-      </li>
+      {{picker-section-li service=service}}
     {{/each}}
   {{else}}
     {{repeat-element 'li' 7}}
   {{/if}}
 </ul>
-<button {{action "submit"}} class={{if hasSelected '' 'hidden'}}>Continue</button>
+<button {{action 'submit'}} class={{if hasSelected '' 'hidden'}} onclick={{action 'trackEvent' 'Submitted picker' properties}}>Continue</button>

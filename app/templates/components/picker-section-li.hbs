@@ -1,0 +1,2 @@
+{{input type='checkbox' id=(concat 'service-' service.id) checked=service.isSelected on="click" action=(action 'trackEvent' 'Changed picker selection' properties)}}
+<label for="service-{{service.id}}">{{service.name}}</label>
