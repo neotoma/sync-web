@@ -32,7 +32,7 @@ export default NoticeSectionComponent.extend({
         sources: this.get('sessionsService.sourcesWithoutJobs').map((source) => source.get('id')),
         storageNames: this.get('sessionsService.storages').map((storage) => storage.get('name')),
         storages: this.get('sessionsService.storages').map((storage) => storage.get('id'))
-      })
+      });
 
       this.transitionPromise((resolve) => {
         this.get('sessionsService.storages').forEach((storage) => {
@@ -50,7 +50,7 @@ export default NoticeSectionComponent.extend({
                 jobName: job.get('name'),
                 sourceName: job.get('source.name'),
                 storageName: job.get('storage.name')
-              })
+              });
             });
           });
         });
